@@ -1,19 +1,15 @@
 import { Form, redirect, useNavigation, useActionData } from "react-router-dom";
-
+import { formatCurrency } from "../../utils/helpers";
+import { useState } from "react";
+import { clearCart, getCart, getTotalCartPrice } from "../cart/cartSlice";
 import { createOrder } from "../../services/apiRestaurant";
 import { useSelector } from "react-redux";
-import { clearCart, getCart, getTotalCartPrice } from "../cart/cartSlice";
+
 import Button from "../../ui/Button";
 import EmptyCart from "../cart/EmptyCart";
 import store from "../../store";
-import { formatCurrency } from "../../utils/helpers";
-import { useState } from "react";
 
-// https://uibakery.io/regex-library/phone-number
-const isValidPhone = (str) =>
-  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str,
-  );
+const isValidPhone = (str) => /^\+8801\d{9}$/.test(str);
 
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
